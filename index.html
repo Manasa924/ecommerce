@@ -4,29 +4,87 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ecommerce Store</title>
-  <link rel="stylesheet" href="style.css"/>
+
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
+  <!-- Navbar -->
   <nav class="navbar">
+
     <h1>MyShop</h1>
+
     <h2>Welcome to My Store</h2>
 
+    <!-- Dark Mode Button -->
+    <button id="darkModeBtn">
+      Dark Mode
+    </button>
+
+    <!-- Search -->
     <input
       type="text"
       id="searchInput"
       placeholder="Search products..."
     />
 
+    <!-- Cart -->
     <div class="cart">
       Cart: <span id="cartCount">0</span>
     </div>
+
   </nav>
 
-  <!-- Products -->
-  <div class="products-container" id="productsContainer">
+  <!-- Filter Buttons -->
+  <div class="filters">
+
+    <button onclick="filterProducts('All')">
+      All
+    </button>
+
+    <button onclick="filterProducts('Fashion')">
+      Fashion
+    </button>
+
+    <button onclick="filterProducts('Electronics')">
+      Electronics
+    </button>
+
   </div>
 
+  <!-- Products Container -->
+  <div class="products-container" id="productsContainer">
+
+    <!-- Products will come from JavaScript -->
+
+  </div>
+
+  <!-- Product Modal -->
+  <div class="modal" id="modal">
+
+    <div class="modal-content">
+
+      <span id="closeModal">&times;</span>
+
+      <img id="modalImage" alt="Product Image" />
+
+      <h2 id="modalTitle"></h2>
+
+      <p id="modalPrice"></p>
+
+      <p id="modalDescription"></p>
+
+    </div>
+
+  </div>
+
+  <!-- Toast Message -->
+  <div id="toast">
+    Product Added To Cart
+  </div>
+
+  <!-- JavaScript -->
   <script src="script.js"></script>
 
 </body>
