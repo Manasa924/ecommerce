@@ -73,14 +73,46 @@ const toast =
 const darkModeBtn =
   document.getElementById("darkModeBtn");
 
+const sort =
+  document.getElementById("sort");
+
+const loader =
+  document.getElementById("loader");
+
 /* =========================
-   CART COUNT
+   CART
 ========================= */
 
-let count =
-  localStorage.getItem("cartCount") || 0;
+let cart =
+  JSON.parse(localStorage.getItem("cart"))
+  || [];
 
-cartCount.textContent = count;
+let count = 0;
+
+/* =========================
+   UPDATE CART COUNT
+========================= */
+
+function updateCartCount() {
+
+  let totalCount = 0;
+
+  cart.forEach((item) => {
+
+    totalCount += item.quantity;
+
+  });
+
+  count = totalCount;
+
+  cartCount.textContent = count;
+
+  localStorage.setItem(
+    "cartCount",
+    count
+  );
+
+}
 
 /* =========================
    DISPLAY PRODUCTS
@@ -155,16 +187,63 @@ function addCartFunctionality() {
 
     button.addEventListener("click", () => {
 
-      count++;
+      const productId =
+        Number(button.dataset.id);
+
+      const product =
+        products.find((item) => {
+
+          return item.id === productId;
+
+        });
+
+      /* CHECK EXISTING PRODUCT */
+
+      const existingProduct =
+        cart.find((item) => {
+
+          return item.id === product.id;
+
+        });
+
+      /* INCREASE QUANTITY */
+
+      if (existingProduct) {
+
+        existingProduct.quantity++;
+
+      }
+
+      /* ADD NEW PRODUCT */
+
+      else {
+
+        cart.push({
+
+          ...product,
+
+          quantity: 1
+
+        });
+
+      }
+
+      /* SAVE CART */
 
       localStorage.setItem(
-        "cartCount",
-        count
+        "cart",
+        JSON.stringify(cart)
       );
 
-      cartCount.textContent = count;
+      /* UPDATE COUNT */
+
+      updateCartCount();
+
+      /* SHOW TOAST */
 
       showToast();
+
+      console.log(cart);
 
     });
 
@@ -196,6 +275,34 @@ function filterProducts(category) {
   displayProducts(filteredProducts);
 
 }
+
+/* =========================
+   SORT PRODUCTS
+========================= */
+
+sort.addEventListener("change", () => {
+
+  let sortedProducts = [...products];
+
+  if (sort.value === "low") {
+
+    sortedProducts.sort(
+      (a, b) => a.price - b.price
+    );
+
+  }
+
+  if (sort.value === "high") {
+
+    sortedProducts.sort(
+      (a, b) => b.price - a.price
+    );
+
+  }
+
+  displayProducts(sortedProducts);
+
+});
 
 /* =========================
    OPEN MODAL
@@ -245,7 +352,7 @@ closeModal.addEventListener("click", () => {
 
 });
 
-/* Close modal when clicking outside */
+/* CLOSE MODAL WHEN CLICKING OUTSIDE */
 
 window.addEventListener("click", (event) => {
 
@@ -287,7 +394,21 @@ darkModeBtn.addEventListener("click", () => {
 });
 
 /* =========================
+   LOADER
+========================= */
+
+loader.style.display = "block";
+
+setTimeout(() => {
+
+  loader.style.display = "none";
+
+  displayProducts(products);
+
+}, 1000);
+
+/* =========================
    INITIAL DISPLAY
 ========================= */
 
-displayProducts(products);
+updateCartCount();

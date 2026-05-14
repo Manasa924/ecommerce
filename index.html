@@ -1,42 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
   <title>Ecommerce Store</title>
 
-  <link rel="stylesheet" href="style.css" />
+  <link
+    rel="stylesheet"
+    href="style.css"
+  />
+
 </head>
 
 <body>
 
-  <!-- Navbar -->
+  <!-- =========================
+       NAVBAR
+  ========================== -->
+
   <nav class="navbar">
 
     <h1>MyShop</h1>
 
     <h2>Welcome to My Store</h2>
 
-    <!-- Dark Mode Button -->
+    <!-- DARK MODE -->
+
     <button id="darkModeBtn">
       Dark Mode
     </button>
 
-    <!-- Search -->
+    <!-- SEARCH -->
+
     <input
       type="text"
       id="searchInput"
       placeholder="Search products..."
     />
 
-    <!-- Cart -->
+    <!-- CART -->
+
     <div class="cart">
-      Cart: <span id="cartCount">0</span>
+
+      Cart:
+      <span id="cartCount">
+        0
+      </span>
+
     </div>
+
+    <!-- CART PAGE -->
+
+    <a href="cart.html">
+      Go To Cart
+    </a>
 
   </nav>
 
-  <!-- Filter Buttons -->
+  <!-- =========================
+       SORT
+  ========================== -->
+
+  <div class="sort-container">
+
+    <select id="sort">
+
+      <option value="default">
+        Sort Products
+      </option>
+
+      <option value="low">
+        Price: Low To High
+      </option>
+
+      <option value="high">
+        Price: High To Low
+      </option>
+
+    </select>
+
+  </div>
+
+  <!-- =========================
+       LOADER
+  ========================== -->
+
+  <div id="loader">
+    Loading...
+  </div>
+
+  <!-- =========================
+       FILTER BUTTONS
+  ========================== -->
+
   <div class="filters">
 
     <button onclick="filterProducts('All')">
@@ -53,25 +116,54 @@
 
   </div>
 
-  <!-- Products Container -->
-  <div class="products-container" id="productsContainer">
+  <!-- =========================
+       PRODUCTS CONTAINER
+  ========================== -->
 
-    <!-- Products will come from JavaScript -->
+  <div
+    class="products-container"
+    id="productsContainer"
+  >
+
+    <!-- PRODUCTS FROM JS -->
 
   </div>
 
-  <!-- Product Modal -->
-  <div class="modal" id="modal">
+  <!-- =========================
+       PRODUCT MODAL
+  ========================== -->
+
+  <div
+    class="modal"
+    id="modal"
+  >
 
     <div class="modal-content">
 
-      <span id="closeModal">&times;</span>
+      <!-- CLOSE BUTTON -->
 
-      <img id="modalImage" alt="Product Image" />
+      <span id="closeModal">
+
+        &times;
+
+      </span>
+
+      <!-- PRODUCT IMAGE -->
+
+      <img
+        id="modalImage"
+        alt="Product Image"
+      />
+
+      <!-- PRODUCT TITLE -->
 
       <h2 id="modalTitle"></h2>
 
+      <!-- PRODUCT PRICE -->
+
       <p id="modalPrice"></p>
+
+      <!-- PRODUCT DESCRIPTION -->
 
       <p id="modalDescription"></p>
 
@@ -79,13 +171,22 @@
 
   </div>
 
-  <!-- Toast Message -->
+  <!-- =========================
+       TOAST MESSAGE
+  ========================== -->
+
   <div id="toast">
+
     Product Added To Cart
+
   </div>
 
-  <!-- JavaScript -->
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
   <script src="script.js"></script>
 
 </body>
+
 </html>
